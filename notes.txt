@@ -1,0 +1,4 @@
+# All important notes, planning steps, interpretation of results...
+
+TODO:
+- There is a bug in the first step, 01_download, files are not being downloaded
