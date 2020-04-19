@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 
-'''Get pdb contents, randomly select some sequences, download them'''
+'''
+Python script 2, "download_from_pdb.py": downloads specified sequences; input = PDBList (download selected files from python script 1), output = folder with PDB files -> 2 hours
+
+Get pdb contents, randomly select some sequences, download them
+'''
 
 import sys, os
 import random
@@ -18,14 +22,15 @@ except:
 pdbl = PDBList()
 counter = 0
 with open(FILE) as fin:
-  for entry in fin:
-    outfile = pdbl.retrieve_pdb_file(entry.strip(), file_format="pdb", pdir="pdb")
+      for entry in fin:
+        outfile = pdbl.retrieve_pdb_file(entry.strip(), file_format="pdb", pdir="pdb")
     # In case you are wondering: to know what the `retrieve_pdb_file` method returns,
     # you should read the documentation,
     # https://biopython.org/DIST/docs/api/Bio.PDB.PDBList%27.PDBList-class.html#retrieve_pdb_file
     # Otherwise, the next two lines might not make a lot of sense
-    if os.path.exists(outfile):
-      counter += 1
+        if os.path.exists(outfile):
+          counter += 1
+      
 
-# Problem: some structures might not exist ("Desired structure doesn't exists")
+#Problem: some structures might not exist ("Desired structure doesn't exists")
 print(f'---\nDownloaded {counter} entries from PDB.', file=sys.stderr)

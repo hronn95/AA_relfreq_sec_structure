@@ -12,3 +12,7 @@ __pycache__/
 .mypy_cache/
 .dmypy.json
 dmypy.json
+
+#pictures for markdown file
+Pictures/
+

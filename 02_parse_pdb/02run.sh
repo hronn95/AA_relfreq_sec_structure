@@ -20,8 +20,9 @@ done
 
 cd ..
 
-# Do stuff
 
 # Note: to run compiled *.pyc scripts, you need to call them like this: e.g.
-#python ../bin/parse_pdb_files.cpython-37.pyc
+python ../bin/parse_pdb_files.cpython-37.pyc ../02_parse_pdb/data > ../02_parse_pdb/results/relative_frequency.csv
 
+# remove tmpdata
+rm -r tmpdata

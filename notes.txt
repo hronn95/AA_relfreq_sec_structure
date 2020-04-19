@@ -1,4 +1,112 @@
-# All important notes, planning steps, interpretation of results...
+Project goal:
+The goal of this project is to determine the relative frequency of the constituent amino acids for three protein secondary structural classes: helix, sheet, and other.
 
-TODO:
-- There is a bug in the first step, 01_download, files are not being downloaded
+From input to results:
+Input data used is the PDBList imported from Biopython (Bio.PDB)
+Required steps to process the data:
+    1. Download selected number (N=100) of protein structure files from PDBList
+    2. Parse the protein structure files aquired in step 1 to determine the relative frequency of amino acids present for protein structures helix, sheet, and other
+        2.a Output the results in a human readable format (e.g., .csv)
+    3. Visualize the results from step 2 by plotting them
+    The most informative plot would likely be a graph of some sort plotting the amino acids against their relative frequency for helix, sheet, and other structures
+
+Requirements:
+    Required environment: 
+        - Online access to PDB database
+        - Python (3.7.6)
+        - Biopython (1.76)
+        - xssp (`mkdssp` executable, 3.0.5)
+        - numpy (1.18.1)
+        - matplotlib (3.1.1)
+        - pandas (1.0.3)
+     
+     Required packages/modules:
+        - sys (system-specific parameters and functions)
+        - os (miscellaneous operating system interfaces)
+        - random (generate pseudo-random numbers)
+        - Bio.PDB (works with crystal structures of biological macromolecules)
+        - PDBList (imported from Bio.PDB - Access the PDB over the internet (e.g. to download structures))
+
+Milestones and work packages:
+    Milestone 1: Collect necessary information
+        WP 1: Learn about PDB database -> 30 min
+            informative links:
+            https://en.wikipedia.org/wiki/Protein_Data_Bank
+            http://www.wwpdb.org/
+            https://www.rcsb.org/pdb/static.do?p=general_information/about_pdb/index.html
+        WP 2: Learn about pdb file format -> 30 min
+            informative links:
+            https://en.wikipedia.org/wiki/Protein_Data_Bank_(file_format)
+            https://www.rcsb.org/pdb/static.do?p=file_formats/pdb/index.html
+        WP 3: Learn about Biopython and Bio.PDB -> 60 min
+            informative links:
+            https://en.wikipedia.org/wiki/Biopython
+            https://biopython.org/
+            https://biopython.org/wiki/The_Biopython_Structural_Bioinformatics_FAQ
+            
+    Milestone 2: Select and download the protein structure files from PDB (01_download) -> Deliverable: Folder with PDB files
+        WP 1: Select and download dataset (bash script 01run.sh calls python scripts select_from_pdb.py and download_from_pdb_py) -> 15 min
+    
+    Milestone 3: Parse the downloaded pdb files and determine the relative frequency of amino acids of helix, sheet, or other structure (02_parse_pdb) -> Deliverable: .csv file with the determined amino acids relative frequency
+        WP 1: Parse the pdb files and aquire the amino acids relative frequency (bash script 02run.sh calls the python script parse_pdb_files.cpython-37.pyc) -> 15 min
+    
+    Milestone 4: Visualize the amino acid relative frequency aquired in milestone 3 (03_visualize) -> Deliverable: pdf file containing a graph of the amino acids plotted against their relative frequency for each structure
+        WP 1: Plot the .csv file obtained from milestone 3 (bash script 03run.sh calls python script plot_multibar.cpython-37.pyc) -> 15 min
+
+
+Required Python scripts:
+    Python script 1, "select_from_pdb.py": gets pdb index and randomly selects number of sequences; input = PDBList, output = results written to stdout -> 2 hours
+    Python script 2, "download_from_pdb.py": downloads specified sequences; input = PDBList (download selected files from python script 1), output = folder with PDB files -> 2 hours
+    Python script 3, "parse_pdb_files.cpython-37.pyc" (script is compiled as bytecode): parses the aquired pdb files and determines the amino acids relative frequency; input = PDB files from python script 2, output = .txt file with the calculated amino acids relative frequency for helix, sheet, and other structures -> 4 hours
+    Python script 4, "plot_multibar.cpython-37.pyc" (script is compiled as bytecode): plots the determined amino acids from the aquired results from python script 3; input = .csv tab seperated file of the amino acids relative frequency, output = pdf file with plotted graph of the amino acids relative frequency of helix, sheet, and other structure -> 4 hours
+
+Project structure: 
+Which files/folders are required to reproduce the project:
+        01_download
+            "01run.sh"
+        02_parse_pdb
+            "02run.sh"
+        03_visualize
+            "03run.sh"
+        bin
+            "select_from_pdb.py"
+            "download_from_pdb.py"
+            "parse_pdb_files.cpython-37.pyc"
+            "plot_multibar.cpython-37.pyc"
+        "notes.txt"
+        "requirements.txt"
+        "README.md"
+    Others:
+        doc
+            "Constantini2006.pdf"
+        "best_practice_cheatsheet.md"
+    
+Which files/folders should be present after successful project completion:
+        01_download
+            results
+                "pdb_selection.txt"
+                100x "pdb*.ent"
+            "01run.sh"
+        02_parse_pdb
+            data
+                100x "pdb*.ent"
+            results
+                "AArelative_frequency.csv"
+            02run.sh
+        03_visualize
+            data
+                "AArelative_frequency.csv"
+            results
+                "AA_frequency.pdf"
+            "03run.sh"
+         bin
+            "select_from_pdb.py"
+            "download_from_pdb.py"
+            "parse_pdb_files.cpython-37.pyc"
+            "plot_multibar.cpython-37.pyc"
+        "notes.txt"
+        "requirements.txt"
+        "README.md"
+        doc
+            "Constantini2006.pdf"
+        "best_practice_cheatsheet.md"

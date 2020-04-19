@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 '''
+Python script 1, "select_from_pdb.py": gets pdb index and randomly selects number of sequences; input = PDBList, output = results written to stdout -> 2 hours
+
 Get pdb index and randomly select a number of sequences.
 
 More info: https://biopython.org/wiki/The_Biopython_Structural_Bioinformatics_FAQ,
@@ -23,19 +25,19 @@ except:
 
 # Get index file
 pdbl = PDBList()
-#print(f"Downloading PDB index file, this takes a while.", file=sys.stderr)
+#print(f"Downloading PDB index file, this takes a while.", file=sys.stdout)
 all_entries = pdbl.get_all_entries()
 
 # Select random subset
 selected = random.sample(all_entries, DATASIZE)
-print(f"Randomly selected %d entries from {len(all_entries)} entries." % DATASIZE, file=sys.stderr)
+print(f"Randomly selected %d entries from {len(all_entries)} entries." % DATASIZE, file=sys.stdout)
 
 # Write results to stdout
 for entry in selected:
-  print(entry, file=sys.stderr)
+  print(entry, file=sys.stdout)
 
-# Get data files
+#Get data files
 #for entry in selected:
-#  pdbl.retrieve_pdb_file(entry, file_format="pdb", pdir="pdb")
+#pdbl.retrieve_pdb_file(entry, file_format="pdb", pdir="pdb")
 
 
